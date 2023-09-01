@@ -1,0 +1,41 @@
+
+.table{
+  width:100% !important;
+}
+.table tbody tr td{
+  border:0px solid #f5f3f4;
+  padding:0px;
+  color: black !important;;
+}
+.table tbody tr th{
+  border:0px solid #f5f3f4;
+  padding:0px;
+  background-color:#f5f3f4!important;
+
+}
+
+.box {
+  background-color:#ECF9FF;
+  border:1px solid grey;
+  padding:1%;
+  text-align:center;
+  font-weight:bolder;
+  font-size:120%;  
+}
+.viewDetails{
+  display: block;
+  font-weight: bolder;
+  width:100%;
+  padding-right:20px;
+  padding-left:20px;
+  padding-bottom:10px;
+  padding-top:10px;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  text-align: left;
+}
+.logo  {
+  float: left;    
+  margin-right:5px;
+  width:150px;
+}

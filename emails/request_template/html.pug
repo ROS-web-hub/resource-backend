@@ -1,0 +1,130 @@
+doctype html
+html
+  head 
+   style
+      include style.css
+  body
+    img(src=emailLogo alt='Logo' class='logo')
+    h2 BOOKINGS
+
+    table(class='table table-striped' cellpadding='0' cellspacing='0')         
+        tr 
+            td(colspan=2)
+                p Hi #{requestedBy.name},
+                p A request was made by for&nbsp;
+                    b #{requestedBy.name} &nbsp;
+                    a(href=requestedBy.emailLink) #{requestedBy.email}
+        tr 
+            td(colspan=2 , bgcolor="#F9F9F9")
+                a(href=viewRequestLink class='viewDetails') View Details
+    h2 Summary of Request
+    table(class='table table-striped' , bgcolor="#F9F9F9")
+        if isRecurring
+            tr
+                td 
+                    strong Occurrence
+                td #{ocurrenceOptions.eventType.toUpperCase()}  #{ocurrenceOptions.pattern.toUpperCase()} 
+
+        tr 
+            td(width="20%")
+                strong Live, Pre-record or Cameraman
+            td #{requestType =='prerecorded' ? 'PRE-RECORD' : requestType.toUpperCase()}
+        
+        tr 
+            td
+                strong Request Date:
+            td #{requestDate}
+        tr
+            td 
+                strong Time Slot:
+            td #{requestTimeSlot}
+    
+        if  channel && channel.name
+            tr 
+                td
+                    strong Channel:
+                td #{channel.name}
+        if  resourceId && resourceId.name
+            tr 
+                td
+                    strong Host Studio:
+                td #{resourceId.name}
+        
+        if  controlRoom && controlRoom.name
+            tr 
+                td
+                    strong Control Room:
+                td #{controlRoom.name}
+        if requestType == 'prerecorded' && participants && participants.length > 0
+            each p in participants
+                if p.type == 'host'
+                    tr
+                        td 
+                            strong Host Studio:
+                        td #{p.studio.name}
+                            
+                    tr 
+                        td 
+                            strong Host Name:
+                        td #{p.name}
+                if p.type == 'guest'
+                    tr
+                        td 
+                            strong Guest Name:
+                        td #{p.name}
+                            
+                    tr 
+                        td 
+                            strong Guest Studio:
+                        td #{p.studio.name}
+     
+        tr 
+            td
+                strong Details:
+            td #{details}
+        <tr>
+            td(colspan=2)
+        <tr>
+            td(colspan=2)
+        if  program
+            tr 
+                th PROGRAM
+                td #{program} 
+        if  shootType && shootType.name
+            tr 
+                th SHOOT TYPE:
+                td #{shootType.name} 
+        if  contactInformation
+            tr 
+                th CONTACT INFORMATION:
+                td #{contactInformation} 
+  
+        each r in resourcesList
+            tr 
+                td(colspan="2")
+            tr 
+                td 
+                    strong #{r.name} Approvers:
+                td 
+                    each e in r.approvers
+                        span #{e.name} &nbsp;
+                        a(href='mailto:'+e.username) #{e.username};
+                        span &nbsp;
+             
+        //-
+            tr 
+                td 
+                    strong Request approvals status:
+                td 
+                    table(class='table table-striped')
+                        tr 
+                            td(width="20%")  
+                                strong Status
+                            td(width="80%")  
+                                strong Note
+                        each approval in approvals
+                            tr
+                                td #{approval.status.toUpperCase()}         
+                                td #{approval.note}   
+    
+   
